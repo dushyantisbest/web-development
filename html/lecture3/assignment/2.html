@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+  </head>
+  <body>
+    <form action="/action">
+      <div>
+        <label for="name">
+          Name:
+          <input type="text" name="name" />
+        </label>
+      </div>
+      <div>
+        Sex:
+        <label for="male">
+          <input type="radio" id="male" value="M" name="Sex" />
+          Male
+        </label>
+        <label for="female">
+          <input type="radio" id="female" value="F" name="Sex" />
+          Female
+        </label>
+      </div>
+      <div>
+        <label for="country">
+          Country:
+          <select name="country" id="country">
+            <option value="india">INDIA</option>
+            <option value="japan">japan</option>
+            <option value="nepal">nepal</option>
+            <option value="canada">canada</option>
+            <option value="USA">USA</option>
+            <option value="other">other</option>
+          </select>
+        </label>
+      </div>
+      Message:
+      <div>
+        <textarea name="Message" id="Message"></textarea>
+      </div>
+      <div>
+        <label for="sub">
+          <input type="checkbox" name="sub" id="sub" />
+          Subscribe?
+        </label>
+      </div>
+      <input type="submit" />
+    </form>
+  </body>
+</html>
