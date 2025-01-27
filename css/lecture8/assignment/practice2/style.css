@@ -1,0 +1,18 @@
+#outer {
+  display: flex;
+  height: 50px;
+  width: 900px;
+  background-color: pink;
+  border: solid aquamarine;
+  border-radius: 12px;
+  
+}
+
+.inner{
+    height: 50px;
+    width: 80px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around  ;
+}

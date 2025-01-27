@@ -1,0 +1,23 @@
+#outer {
+  display: flex;
+  height: 400px;
+  width: 400px;
+  border: solid rgb(26, 155, 155);
+  border-radius: 5%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.internal {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  font: 50px;
+  background-color: grey;
+  color: black;
+  border: solid black;
+  border-radius: 5%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
