@@ -1,0 +1,38 @@
+#container {
+  height: 700px;
+  width: 800px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+.inner {
+  background-color: pink;
+}
+.one {
+  grid-column: span 12;
+}
+
+.two {
+  grid-row: span 10;
+  grid-column: span 3;
+}
+
+.three {
+  grid-column: span 6;
+}
+
+.four {
+  grid-row: span 10;
+  grid-column: span 3;
+}
+
+.five {
+  grid-row: span 9;
+  grid-column: span 6;
+}
+
+.six {
+  grid-column: span 12;
+}
