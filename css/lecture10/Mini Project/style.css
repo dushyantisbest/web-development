@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+.main_box {
+  background-image: url(photo.jpg);
+  background-size: cover;
+  height: 100vh;
+  font-family: "Poppins", serif;
+}
+
+.sidebar_menu {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 300px;
+  /* height: 80%; */
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.502);
+  /* hide the navbar */
+  left: -350px;
+  transition: left 0.8s linear;
+}
+
+.menu {
+  color: white;
+}
+
+.menu a {
+  text-decoration: none;
+  margin: 20px;
+  color: white;
+  font-size: 20px;
+}
+
+li {
+  display: block;
+  list-style: none;
+  padding: 20px;
+}
+
+li:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.502);
+}
+
+li i {
+  font-size: 20px;
+}
+
+.social_media {
+  display: flex;
+  justify-content: center;
+}
+.social_media i {
+  color: white;
+  opacity: 0.5;
+  margin: 2px;
+}
+.social_media i:hover {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.logo a {
+  font-size: 25px;
+  color: white;
+  position: relative;
+  left: 50px;
+  top: 3px;
+}
+
+.btn_one i {
+  position: relative;
+  font-size: 30px;
+  top: 50px;
+  left: 15px;
+  opacity: 100%;
+  visibility: visible;
+  transition: transform 0.9s ease-in, opacity 0.5s ease-in;
+}
+
+.btn_one i:hover {
+  transform: scale(1.25);
+}
+
+.btn_two {
+  font-size: 25px;
+  position: absolute;
+  top: 5px;
+  left: 260px;
+}
+
+.btn_two i:hover{
+  cursor: pointer;
+  transform: scale(1.25);
+  text-shadow: 0 0 5px black;
+}
+
+#check:checked ~.sidebar_menu{
+  left: 0px;
+}
+/* #check:checked ~.btn_one{
+  left: 350px;
+  opacity: 0%;
+  visibility: hidden;
+  transform: translateX(100px);
+} */
+
+#check:checked ~ .btn_one i {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(100px);
+}
