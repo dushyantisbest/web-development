@@ -36,6 +36,10 @@
   font-size: 20px;
 }
 
+a {
+  text-decoration: none;
+}
+
 li {
   display: block;
   list-style: none;
@@ -97,13 +101,13 @@ input[type="checkbox"] {
   left: 260px;
 }
 
-.btn_two i:hover{
+.btn_two i:hover {
   cursor: pointer;
   transform: scale(1.25);
   text-shadow: 0 0 5px black;
 }
 
-#check:checked ~.sidebar_menu{
+#check:checked ~ .sidebar_menu {
   left: 0px;
 }
 /* #check:checked ~.btn_one{
