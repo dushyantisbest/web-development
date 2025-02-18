@@ -1,84 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS Project navbar animated</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI CALCULATOR</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="main_box">
-      <input type="checkbox" id="check" />  
-      <div class="btn_one">
-        <label for="check" style="color: white">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-      </div>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>BMI CALCULATOR</h1>
 
-      <div class="sidebar_menu">
-        <div class="logo">
-          <a href="#">navbar</a>
-        </div>
+        <p>Weight(kg)</p>
 
-        <div class="btn_two">
-          <label for="check" style="color: grey">
-            <i class="fa-solid fa-xmark"></i>
-          </label>
-        </div>
+        <input type="text">
 
-        <div class="menu">
-          <ul>
-            <li>
-              <i class="fa-solid fa-image"></i>
-              <a href="#">Gallery</a>
-            </li>
-            <li>
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              <a href="#">Shortcuts</a>
-            </li>
-            <li>
-              <i class="fa-solid fa-photo-film"></i>
-              <a href="#">Exhibits</a>
-            </li>
-            <li>
-              <i class="fa-solid fa-calendar-days"></i>
-              <a href="#">Events</a>
-            </li>
-            <li>
-              <i class="fa-solid fa-store"></i>
-              <a href="#">Store</a>
-            </li>
-            <li>
-              <i class="fa-solid fa-phone"></i>
-              <a href="#">Contact</a>
-            </li>
-            <li>
-              <i class="fa-regular fa-comments"></i>
-              <a href="#">Feedback</a>
-            </li>
-          </ul>
-        </div>
+        <p>Height(cm)</p>
 
-        <div class="social_media">
-          <ul>
-            <a href="#"><i class="fa-brands fa-facebook"></i></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-          </ul>
+        <input type="text">
+
+        <button>CALCULATE</button>
+        
+        <div class="result">Result</div>
+        <div class="grade">
+            <h2>BMI WEIGHT GRADE</h1>
+            <p>Under weight:Less than 18.5 </p>
+            <p>Healthy weight:Between 18.6 and 24.9</p>
+            <p>Over weight:More than 25</p>
         </div>
-      </div>
     </div>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
