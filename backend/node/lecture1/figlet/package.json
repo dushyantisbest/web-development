@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "figlet": "^1.8.1"
+  },
+  "name": "dyamm",
+  "version": "1.0.0",
+  "description": "trying to create a pakage",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dushyant kumar",
+  "license": "ISC",
+  "type": "module"
+}
