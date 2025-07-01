@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+    <style>
+      textarea {
+        width: 300px;
+        height: 170px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>New Post</h1>
+    <form method="post" action="http://localhost:8080/post">
+      <input placeholder="username" type="text" name="username" />
+      <br /><br />
+      <textarea name="content" placeholder="type your content here"></textarea>
+      <br />
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>

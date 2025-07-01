@@ -8,10 +8,10 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-const user = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 // export default user;
-export default user;
+export default User;
 
 //problems
 // Schema

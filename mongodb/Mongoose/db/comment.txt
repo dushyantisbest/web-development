@@ -1,0 +1,10 @@
+//insert data using faker in mongodb --done
+
+
+insert and insert multiple  --done
+find --done
+update
+find and update
+find and update by id
+delete
+schema validation update error
