@@ -1,9 +1,18 @@
 import mongoose from "mongoose";
-// import { User, Chat } from "./models/models.js";
 import User from "./models/user.model.js";
 import Chat from "./models/chat.model.js";
 import app from "./app.js";
 import connectionInstance from "./db/index.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // import mongoose from "mongoose";
 
@@ -35,6 +44,16 @@ async function addData() {
   ]);
 }
 
-await addData();
+// / route for login user
+
+app.get("/", (req, res) => {
+  //show login page
+  res.render("login.ejs");
+});
+// make / which will show all the chats of specific user// also make a filter which will show recived as sent chats seperately
+// make / which can update your sent chats / like a edit btn in whatsapp
+// make / which will add user to the database / kind of login
+// make / which will send a chat to a specific user
+// make / which will delete a specific chat
 
 app.listen(8080, () => console.log("server working"));

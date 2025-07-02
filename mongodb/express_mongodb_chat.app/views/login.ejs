@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login page</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <h1>Login</h1>
+    <div class="container">
+      <form action="" method="post">
+        <label for="username">
+          <input
+            type="text"
+            name="username"
+            pattern="^\S+$"
+            title="No spaces allowed"
+            id="username"
+          />
+        </label>
+        <label for="password">
+          <input type="password" name="password" id="password" />
+        </label>
+        <button type="submit">login</button>
+        <p>signup</p>
+        <button type="submit">signup</button>
+      </form>
+    </div>
+  </body>
+</html>
