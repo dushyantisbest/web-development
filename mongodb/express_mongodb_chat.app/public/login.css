@@ -7,6 +7,10 @@ body {
   min-height: 100vh;
 }
 
+.username-exists {
+  color: red;
+}
+
 .container {
   height: 400px;
   width: 350px;
@@ -71,4 +75,8 @@ button:hover {
 
 p {
   display: inline;
+}
+
+.bottom {
+  margin: 25px;
 }

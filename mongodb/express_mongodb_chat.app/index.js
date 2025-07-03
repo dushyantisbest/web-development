@@ -20,12 +20,7 @@ try {
   console.log("error occured");
 }
 
-async function addData() {
-  const users = await User.insertMany([
-    { username: "dushyant123", password: "lol" },
-    { username: "ghost", password: "ghost123" },
-  ]);
-
+async function addChat() {
   const dushyant = users.find((u) => u.username === "dushyant123");
   const ghost = users.find((u) => u.username === "ghost");
   await Chat.insertMany([
@@ -45,12 +40,27 @@ async function addData() {
 // / route for login user
 
 app.get("/", (req, res) => {
-  //show login page
-  //get login data check with database if correct open all chats related to that user
-  // if incorrect then show incorrect and offer them to signup
-  res.render("login.ejs");
+  const error = req.query.error;
+
+  res.render("login.ejs", { error });
 });
-// make / which will show all the chats of specific user// also make a filter which will show recived as sent chats seperately
+
+app.post("/user", async (req, res) => {
+  // match the data with database
+  // if error tell wrong password or username
+  // if don't found in database then signup 
+
+  try {
+    await User.insertOne(req.body);
+  } catch (error) {
+    console.log("Error occured check password or signup");
+    if (error.errorResponse.code == 11000) {
+      res.redirect("/?error=username_exists");
+      console.log("make changes in login webpage");
+    }
+  }
+});
+// make / which will show all the chats of specific user// also make a filter which will show recived as sent chats seperate
 // make / which can update your sent chats / like a edit btn in whatsapp
 // make / which will add user to the database / kind of login
 // make / which will send a chat to a specific user
