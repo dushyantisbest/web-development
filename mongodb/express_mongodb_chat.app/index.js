@@ -9,8 +9,6 @@ import { dirname } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
-
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -48,6 +46,8 @@ async function addData() {
 
 app.get("/", (req, res) => {
   //show login page
+  //get login data check with database if correct open all chats related to that user
+  // if incorrect then show incorrect and offer them to signup
   res.render("login.ejs");
 });
 // make / which will show all the chats of specific user// also make a filter which will show recived as sent chats seperately
@@ -56,4 +56,6 @@ app.get("/", (req, res) => {
 // make / which will send a chat to a specific user
 // make / which will delete a specific chat
 
-app.listen(8080, () => console.log("server working"));
+app.listen(process.env.PORT, () =>
+  console.log("server working", process.env.PORT)
+);
