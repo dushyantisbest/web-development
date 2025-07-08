@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const chatSchema = new mongoose.Schema(
   {
-    to: { type: String, require: true },
-    from: { type: String, require: true },
-    content: { type: String, require: true },
+    to: { type: String, required: true },
+    from: { type: String, required: true },
+    content: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-const Chat = mongoose.model("Chat", userSchema);
+const Chat = mongoose.model("Chat", chatSchema);
 export default Chat;

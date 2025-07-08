@@ -1,0 +1,22 @@
+{
+  "name": "hotels_listing",
+  "version": "1.0.0",
+  "description": "this is a full stack projet which does hostels listing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "type": "module",
+  "author": "dushyant kumar sharma",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
