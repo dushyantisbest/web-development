@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>landing page</title>
+  </head>
+  <body>
+    <h1>Listings</h1>
+    <form action="/listing/add" method="get">
+      <button type="submit">create</button>
+    </form>
+    <ul>
+      <% for(listItem of list) { %>
+      <li><a href="/listing/<%= listItem._id %>"><%= listItem.title %></a></li>
+      <%}%>
+    </ul>
+  </body>
+</html>

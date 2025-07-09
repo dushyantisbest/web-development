@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <form method="post" action="/listing/edit/<%= hotelData._id %>?_method=PUT">
+      <h1>Enter Details</h1>
+      <div>
+        <label for="title">
+          <input
+            type="text"
+            name="title"
+            id=""
+            placeholder="hotel title"
+            value="<%=hotelData.title%>"
+          />
+        </label>
+        <label for="image">
+          <input
+            type="text"
+            name="image"
+            id=""
+            placeholder="image url"
+            value="<%=hotelData.image%>"
+          />
+        </label>
+        <label for="description">
+          <textarea
+            name="description"
+            rows="5"
+            columns="7"
+            placeholder="description"
+            id=""
+          >
+<%= hotelData.description %></textarea
+          >
+        </label>
+        <label for="location">
+          <input
+            type="text"
+            name="location"
+            placeholder="location"
+            id=""
+            value="<%=hotelData.location%>"
+          />
+        </label>
+        <label for="country">
+          <input
+            type="text"
+            name="country"
+            placeholder="country"
+            id=""
+            value="<%=hotelData.country%>"
+          />
+        </label>
+        <label for="price">
+          <input
+            type="number"
+            name="price"
+            placeholder="price"
+            value="<%=hotelData.price%>"
+          />
+        </label>
+        <button type="submit">submit</button>
+      </div>
+    </form>
+  </body>
+</html>

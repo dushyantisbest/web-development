@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+    <link rel="stylesheet" href="/form.css" />
+  </head>
+  <body>
+    <form action="/listing/add" method="post">
+      <h1>Enter Details</h1>
+      <div>
+        <label for="title">
+          <input type="text" name="title" id="" placeholder="hotel title" />
+        </label>
+        <label for="image">
+          <input type="text" name="image" id="" placeholder="image url" />
+        </label>
+        <label for="description">
+          <textarea
+            name="description"
+            rows="5"
+            columns="7"
+            placeholder="description"
+            id=""
+          ></textarea>
+        </label>
+        <label for="location">
+          <input type="text" name="location" placeholder="location" id="" />
+        </label>
+        <label for="country">
+          <input type="text" name="country" placeholder="country" id="" />
+        </label>
+        <label for="price">
+          <input type="number" name="price" placeholder="price" />
+        </label>
+        <button type="submit">submit</button>
+      </div>
+    </form>
+  </body>
+</html>
