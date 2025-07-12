@@ -1,11 +1,12 @@
-<% layout("/layout/boilerplate.ejs") -%>
+<div class="container">
+  <% layout("/layout/boilerplate.ejs") -%>
 
-<h1>Listings</h1>
-<form action="/listing/add" method="get">
-  <button type="submit">create</button>
-</form>
-<ul>
-  <% for(listItem of list) { %>
-  <li><a href="/listing/<%= listItem._id %>"><%= listItem.title %></a></li>
-  <%}%>
-</ul>
+  <h1>Listings</h1>
+  <ul>
+    <div class="row mt-4">
+      <% for(listItem of list) { %>
+      <div class="col-4"><%- include("includes/card.ejs",{listItem}) %></div>
+      <%}%>
+    </div>
+  </ul>
+</div>
