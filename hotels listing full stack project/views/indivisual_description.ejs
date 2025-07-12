@@ -1,27 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1><%= hotelData.title %></h1>
-    <div>
-      <p><%= hotelData.description %></p>
-      <span><%= hotelData.price %></span>
-      <span><%= hotelData.location%></span>
-      <span><%= hotelData.country %></span>
-      <form action="/listing/edit/<%= hotelData._id %>" method="get">
-        <button type="submit">edit</button>
-      </form>
+<% layout("/boilerplate/navbar.ejs") -%>
 
-      <form
-        method="POST"
-        action="/listing/delete/<%= hotelData._id %>?_method=DELETE"
-      >
-        <button type="submit">delete</button>
-      </form>
-    </div>
-  </body>
-</html>
+<h1><%= hotelData.title %></h1>
+<div>
+  <p><%= hotelData.description %></p>
+  <span><%= hotelData.price %></span>
+  <span><%= hotelData.location%></span>
+  <span><%= hotelData.country %></span>
+  <form action="/listing/edit/<%= hotelData._id %>" method="get">
+    <button type="submit">edit</button>
+  </form>
+
+  <form
+    method="POST"
+    action="/listing/delete/<%= hotelData._id %>?_method=DELETE"
+  >
+    <button type="submit">delete</button>
+  </form>
+</div>

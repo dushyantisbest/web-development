@@ -36,7 +36,6 @@ app.get("/chats/new", (req, res) => {
 
 app.post("/chats/new", (req, res) => {
   const { sender, content, receiver } = req.body;
-
   Chat.insertOne({ to: sender, from: receiver, content: content });
   res.redirect("/chats");
 });
