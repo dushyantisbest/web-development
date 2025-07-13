@@ -1,9 +1,10 @@
 <% layout("/layout/boilerplate.ejs") -%>
 <form method="post" action="/listing/edit/<%= hotelData._id %>?_method=PUT">
   <h1>Enter Details</h1>
-  <div>
-    <label for="title">
+  <div class="row">
+    <label class="form-label" for="title">
       <input
+        class="form-control"
         type="text"
         name="title"
         id=""
@@ -11,8 +12,9 @@
         value="<%=hotelData.title%>"
       />
     </label>
-    <label for="image">
+    <label class="form-label" for="image">
       <input
+        class="form-control"
         type="text"
         name="image"
         id=""
@@ -20,19 +22,21 @@
         value="<%=hotelData.image%>"
       />
     </label>
-    <label for="description">
+    <label class="form-label" for="description">
       <textarea
         name="description"
         rows="5"
         columns="7"
         placeholder="description"
         id=""
+        class="form-control"
       >
 <%= hotelData.description %></textarea
       >
     </label>
-    <label for="location">
+    <label class="form-label col-8" for="location">
       <input
+        class="form-control"
         type="text"
         name="location"
         placeholder="location"
@@ -40,8 +44,9 @@
         value="<%=hotelData.location%>"
       />
     </label>
-    <label for="country">
+    <label class="form-label col-4" for="country">
       <input
+        class="form-control"
         type="text"
         name="country"
         placeholder="country"
@@ -49,14 +54,17 @@
         value="<%=hotelData.country%>"
       />
     </label>
-    <label for="price">
+    <label class="form-label" for="price">
       <input
+        class="form-control"
         type="number"
         name="price"
         placeholder="price"
         value="<%=hotelData.price%>"
       />
     </label>
-    <button type="submit">submit</button>
+    <button type="submit" class="btn mx-auto d-block form-submit-btn">
+      submit
+    </button>
   </div>
 </form>

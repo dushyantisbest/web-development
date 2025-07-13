@@ -50,3 +50,8 @@ form .btn {
   text-align: center;
   margin: 20px;
 }
+
+.form-submit-btn {
+  background-color: #ee0a47 !important;
+  color: white;
+}

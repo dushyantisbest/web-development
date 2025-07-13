@@ -7,10 +7,10 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: true,
       default:
-        "https://www.google.com/imgres?q=random%20aesthetic%20pictures&imgurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F80%2F39%2F01%2F803901270a642646222fa6a6a1737ac8.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Frandom-aesthetic--581597739391014360%2F&docid=1X4g8okeH29i_M&tbnid=-02o_Yhg-0MhkM&w=675&h=1200&hcb=2",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       set: (value) =>
         value === ""
-          ? "https://www.google.com/imgres?q=random%20aesthetic%20pictures&imgurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F80%2F39%2F01%2F803901270a642646222fa6a6a1737ac8.jpg&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Frandom-aesthetic--581597739391014360%2F&docid=1X4g8okeH29i_M&tbnid=-02o_Yhg-0MhkM&w=675&h=1200&hcb=2"
+          ? "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           : value,
     },
     price: { type: Number, required: true },
