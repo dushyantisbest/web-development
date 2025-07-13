@@ -1,5 +1,6 @@
 body {
   font-family: "Poppins", sans-serif;
+  padding-top: 80px;
 }
 
 .navbar {
@@ -30,4 +31,22 @@ body {
 
 .card-text {
   font-family: Helvetica, sans-serif, Arial;
+}
+
+.info-container .img-fluid {
+  width: 35rem;
+  height: 35rem;
+  object-fit: cover;
+}
+
+.info-container {
+  height: auto;
+  width: 35rem;
+  padding: 3rem;
+}
+
+form .btn {
+  width: 6rem;
+  text-align: center;
+  margin: 20px;
 }

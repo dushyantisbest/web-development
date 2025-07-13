@@ -1,19 +1,34 @@
 <% layout("/layout/boilerplate.ejs") -%>
 
-<h1><%= hotelData.title %></h1>
-<div>
-  <p><%= hotelData.description %></p>
-  <span><%= hotelData.price %></span>
-  <span><%= hotelData.location%></span>
-  <span><%= hotelData.country %></span>
-  <form action="/listing/edit/<%= hotelData._id %>" method="get">
-    <button type="submit">edit</button>
-  </form>
+<div class="container info-container">
+  <div class="col-12">
+    <img
+      src="<%= hotelData.image %>"
+      alt="hotel image"
+      class="img-fluid center rounded d-block mx-auto m-2"
+    />
+  </div>
+  <h1 class="card-heading"><%= hotelData.title %></h1>
+  <div>
+    <p class="card-text"><%= hotelData.description %></p>
+    <p class="">&#x20B9;<%= hotelData.price.toLocaleString("en-IN") %>/night</p>
+    <span class="cart"><%= hotelData.location%>, <%= hotelData.country %></span>
+    <div class="row">
+      <form
+        action="/listing/edit/<%= hotelData._id %>"
+        method="get"
+        class="col-6 g-2 gx-4"
+      >
+        <button type="submit" class="btn btn-primary">edit</button>
+      </form>
 
-  <form
-    method="POST"
-    action="/listing/delete/<%= hotelData._id %>?_method=DELETE"
-  >
-    <button type="submit">delete</button>
-  </form>
+      <form
+        method="POST"
+        action="/listing/delete/<%= hotelData._id %>?_method=DELETE"
+        class="col-6 g-2"
+      >
+        <button type="submit" class="btn btn-danger">delete</button>
+      </form>
+    </div>
+  </div>
 </div>
