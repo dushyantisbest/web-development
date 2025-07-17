@@ -47,7 +47,7 @@ app.get("/listing/edit/:id", async (req, res) => {
 app.put("/listing/edit/:id", async (req, res) => {
   const { id } = req.params;
 
-  await Listing.findByIdAndUpdate(id, req.body);
+  await Listing.findByIdAndUpdate(id, req.body, { runValidators: true });
   res.redirect(`/listing/${id}`);
 });
 
