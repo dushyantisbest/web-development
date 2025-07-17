@@ -1,6 +1,7 @@
 import app from "./app.js";
 import connectionInstance from "./db.js";
 import Listing from "./models/listing.model.js";
+import asyncWrapper from "./utils/asyncWraper.js";
 // import InputData from "./init.js";
 await connectionInstance();
 //run to imput fake data
@@ -9,10 +10,13 @@ await connectionInstance();
 //routes
 
 //read
-app.get("/listing", async (req, res) => {
-  const list = await Listing.find({});
-  res.render("landing.ejs", { list });
-});
+app.get(
+  "/listing",
+  asyncWrapper(async (req, res) => {
+    const list = await Listing.find({});
+    res.render("landing.ejs", { list });
+  })
+);
 
 //create
 app.get("/listing/add", (req, res) => {
@@ -52,6 +56,10 @@ app.delete("/listing/delete/:id", async (req, res) => {
   let id = req.params.id;
   await Listing.findByIdAndDelete(id);
   res.redirect("/listing");
+});
+
+app.use((req, res, next) => {
+  res.send("something went wrong");
 });
 
 app.listen(8080, () => {
