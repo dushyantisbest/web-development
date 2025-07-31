@@ -1,4 +1,7 @@
+//  bootstrap script to disable browser normal form submission
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
+
 (function () {
   "use strict";
 
@@ -21,4 +24,3 @@
     );
   });
 })();
-
