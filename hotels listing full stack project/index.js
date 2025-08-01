@@ -2,6 +2,7 @@ import app from "./app.js";
 import connectionInstance from "./db.js";
 import Listing from "./models/listing.model.js";
 import asyncWrapper from "./utils/asyncWraper.js";
+import ErrorHandlingExpress from "./utils/ErrorHandling.js";
 // import InputData from "./init.js";
 await connectionInstance();
 //run to imput fake data
@@ -73,8 +74,15 @@ app.delete(
   })
 );
 
+// if the above routes does not match
+app.use((req, res, next) => {
+  next(new ErrorHandlingExpress(404, "Page not found"));
+});
+
 app.use((err, req, res, next) => {
-  res.status(500).send("something went wrong");
+  res
+    .status(err.statusCode || 500)
+    .send(err.message || "Internal server error");
 });
 
 app.listen(8080, () => {
