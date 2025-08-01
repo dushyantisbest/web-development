@@ -27,6 +27,9 @@ app.get("/listing/add", (req, res) => {
 app.post(
   "/listing/add",
   asyncWrapper(async (req, res) => {
+    if (!req.body) {
+      throw new ErrorHandlingExpress(400, "Enter valid data");
+    }
     await Listing.insertOne(req.body);
     res.redirect("/listing");
   })
@@ -57,6 +60,9 @@ app.get(
 app.put(
   "/listing/edit/:id",
   asyncWrapper(async (req, res) => {
+    if (!req.body) {
+      throw new ErrorHandlingExpress(400, "Enter valid data");
+    }
     const { id } = req.params;
 
     await Listing.findByIdAndUpdate(id, req.body, { runValidators: true });
