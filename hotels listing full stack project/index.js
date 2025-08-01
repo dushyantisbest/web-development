@@ -12,6 +12,7 @@ await connectionInstance();
 //routes
 
 const validateListing = (req, res, next) => {
+
   if (listingValidation.validate(req.body).error) {
     throw new ErrorHandlingExpress(
       400,
@@ -40,9 +41,9 @@ app.post(
   "/listing/add",
   validateListing,
   asyncWrapper(async (req, res) => {
-    if (!req.body) {
-      throw new ErrorHandlingExpress(400, "Enter valid data");
-    }
+    // if (!req.body) {
+    //   throw new ErrorHandlingExpress(400, "Enter valid data");
+    // }
     await Listing.insertOne(req.body);
     res.redirect("/listing");
   })
