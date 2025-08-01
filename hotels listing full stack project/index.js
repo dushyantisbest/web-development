@@ -3,12 +3,24 @@ import connectionInstance from "./db.js";
 import Listing from "./models/listing.model.js";
 import asyncWrapper from "./utils/asyncWraper.js";
 import ErrorHandlingExpress from "./utils/ErrorHandling.js";
+import listingValidation from "./schema.js";
 // import InputData from "./init.js";
 await connectionInstance();
 //run to imput fake data
 // InputData();
 
 //routes
+
+const validateListing = (req, res, next) => {
+  if (listingValidation.validate(req.body).error) {
+    throw new ErrorHandlingExpress(
+      400,
+      listingValidation.validate(req.body).error
+    );
+  } else {
+    next();
+  }
+};
 
 //read
 app.get(
@@ -26,6 +38,7 @@ app.get("/listing/add", (req, res) => {
 
 app.post(
   "/listing/add",
+  validateListing,
   asyncWrapper(async (req, res) => {
     if (!req.body) {
       throw new ErrorHandlingExpress(400, "Enter valid data");
@@ -59,6 +72,7 @@ app.get(
 //update
 app.put(
   "/listing/edit/:id",
+  validateListing,
   asyncWrapper(async (req, res) => {
     if (!req.body) {
       throw new ErrorHandlingExpress(400, "Enter valid data");
@@ -86,9 +100,10 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res
-    .status(err.statusCode || 500)
-    .send(err.message || "Internal server error");
+  let statusCode = err.statusCode || 500;
+  let message = err.message || "Internal server error";
+
+  res.render("error.ejs", { statusCode, message });
 });
 
 app.listen(8080, () => {
