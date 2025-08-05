@@ -12,7 +12,6 @@ await connectionInstance();
 //routes
 
 const validateListing = (req, res, next) => {
-
   if (listingValidation.validate(req.body).error) {
     throw new ErrorHandlingExpress(
       400,
@@ -110,3 +109,5 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("server is working");
 });
+
+// just some random line might delete later
