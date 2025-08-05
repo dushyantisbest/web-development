@@ -12,7 +12,7 @@ const locations = [
     location: "Rohini",
   },
   {
-    city: "Jaipur",
+    city: "Dehradun  ",
     location: "Moti Vihar",
   },
 ];
