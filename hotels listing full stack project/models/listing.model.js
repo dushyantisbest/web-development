@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const listingSchema = new mongoose.Schema(
   {
@@ -17,6 +17,7 @@ const listingSchema = new mongoose.Schema(
     location: { type: String, required: true },
     country: { type: String, required: true },
     description: { type: String, required: true },
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   { timestamps: true }
 );
