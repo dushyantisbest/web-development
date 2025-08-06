@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import {  } from "module";
+import Review from "./review.model.js";
 
 const listingSchema = new mongoose.Schema(
   {
@@ -22,6 +22,19 @@ const listingSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// mongoose middleware to remove all the reviews when the listing is deleted
+
+listingSchema.post("findOneAndDelete", async function (myListing) {
+  console.log("getting called");
+  console.log(myListing);
+
+  if (myListing.reviews) {
+    await Review.deleteMany({
+      _id: { $in: myListing.reviews },
+    });
+  }
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 

@@ -45,7 +45,7 @@ app.get(
 
 //create
 app.get("/listing/add", (req, res) => {
-  res.render("form.ejs");
+  res.render("add_listing_form.ejs");
 });
 
 app.post(
@@ -77,7 +77,7 @@ app.get(
     const { id } = req.params;
     let hotelData = await Listing.findById(id);
 
-    res.render("edit-form.ejs", { hotelData });
+    res.render("edit_listing_form.ejs", { hotelData });
   })
 );
 
