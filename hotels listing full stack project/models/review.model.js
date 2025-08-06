@@ -8,6 +8,8 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// make a delete middleware here
+
 const Review = mongoose.model("Review", reviewSchema);
 
 export default Review;

@@ -32,3 +32,65 @@
     </div>
   </div>
 </div>
+
+<!-- review form  -->
+
+<div class="form-group">
+  <h3>Leave a review</h3>
+  <form
+    action="/listing/<%= hotelData._id %>/review"
+    method="post"
+    class="needs-validation"
+    novalidate
+  >
+    <div class="mb-2">
+  <label for="rating" class="form-label">
+    Rating
+  </label>
+  <div class="rating-container">
+    <input type="range" name="rating" id="rating" max="5" min="1" class="form-range" />
+    <div class="rating-labels">
+      <span>1</span>
+      <span>5</span>
+    </div>
+  </div>
+</div>
+    <div>
+      <label for="comment" class="form-label">
+        <textarea
+          name="comment"
+          rows="5"
+          cols="50"
+          id=""
+          class="form-control"
+          placeholder="write your thoughts"
+          required
+        ></textarea>
+        <div class="invalid-feedback">please write some comments</div>
+      </label>
+    </div>
+    <button type="submit" class="btn btn-danger">submit</button>
+  </form>
+</div>
+
+<!-- displaying review  -->
+
+<hr />
+
+<div class="container">
+  <div class="row">
+    <% for(let review of hotelData.reviews ) { %>
+    <div class="card review-card m-2 col-3" style="width: 18rem">
+      <div class="card-body">
+        <p class="card-text"><%= review.comment %></p>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+          <%= `${review.rating} Star` %>
+        </h6>
+        <form action="">
+          <button type="submit" class="btn-danger">Delete review</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

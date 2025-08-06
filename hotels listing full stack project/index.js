@@ -3,7 +3,8 @@ import connectionInstance from "./db.js";
 import Listing from "./models/listing.model.js";
 import asyncWrapper from "./utils/asyncWraper.js";
 import ErrorHandlingExpress from "./utils/ErrorHandling.js";
-import listingValidation from "./schema.js";
+import { listingValidation, reviewValidation } from "./schemaValidation.js";
+import Review from "./models/review.model.js";
 // import InputData from "./init.js";
 await connectionInstance();
 //run to imput fake data
@@ -16,6 +17,17 @@ const validateListing = (req, res, next) => {
     throw new ErrorHandlingExpress(
       400,
       listingValidation.validate(req.body).error
+    );
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  if (reviewValidation.validate(req.body).error) {
+    throw new ErrorHandlingExpress(
+      400,
+      reviewValidation.validate(req.body).error
     );
   } else {
     next();
@@ -53,7 +65,7 @@ app.get(
   "/listing/:id",
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
-    const hotelData = await Listing.findById(id);
+    const hotelData = await Listing.findById(id).populate("reviews");
     res.render("indivisual_description.ejs", { hotelData });
   })
 );
@@ -94,6 +106,19 @@ app.delete(
   })
 );
 
+// Review post route
+app.post(
+  "/listing/:id/review",
+  validateReview,
+  asyncWrapper(async (req, res) => {
+    const listing = await Listing.findOne({ _id: req.params.id });
+    const myReview = await Review.create(req.body);
+    listing.reviews.push(myReview);
+    await listing.save();
+    res.redirect(`/listing/${listing.id}`);
+  })
+);
+
 // if the above routes does not match
 app.use((req, res, next) => {
   next(new ErrorHandlingExpress(404, "Page not found"));
@@ -103,7 +128,7 @@ app.use((err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal server error";
 
-  res.render("error.ejs", { statusCode, message });
+  res.status(statusCode).render("error.ejs", { statusCode, message });
 });
 
 app.listen(8080, () => {

@@ -18,7 +18,7 @@ body {
   text-decoration: none;
 }
 
-.card:hover {
+.listing-card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   transform: scale(1.03);
   transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
@@ -58,4 +58,17 @@ form .btn {
 
 footer {
   background-color: #fef2f4;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.rating-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5px;
 }

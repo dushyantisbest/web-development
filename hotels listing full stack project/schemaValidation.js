@@ -11,4 +11,9 @@ const listingValidation = joi
   })
   .required();
 
-export default listingValidation;
+const reviewValidation = joi.object({
+  comment: joi.string().required(),
+  rating: joi.number().required().min(1).max(5),
+});
+
+export { listingValidation, reviewValidation };
