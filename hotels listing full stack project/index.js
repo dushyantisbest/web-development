@@ -123,10 +123,11 @@ app.post(
 app.delete(
   "/listing/:id/review/:reviewId",
   asyncWrapper(async (req, res) => {
-    const listing = await Listing.findById(req.params.id);
-    const review = await Review.findById(req.params.reviewId);
-    listing.update
-    res.send("working");
+    await Listing.findByIdAndUpdate(req.params.id, {
+      $pull: { reviews: req.params.reviewId },
+    });
+    await Review.findByIdAndDelete(req.params.reviewId);
+    res.redirect(`/listing/${req.params.id}`);
   })
 );
 // if the above routes does not match
