@@ -72,3 +72,7 @@ footer {
   width: 100%;
   margin-top: 5px;
 }
+
+.review-delete-btn {
+  margin: 0.1px !important;
+}

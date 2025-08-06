@@ -44,17 +44,22 @@
     novalidate
   >
     <div class="mb-2">
-  <label for="rating" class="form-label">
-    Rating
-  </label>
-  <div class="rating-container">
-    <input type="range" name="rating" id="rating" max="5" min="1" class="form-range" />
-    <div class="rating-labels">
-      <span>1</span>
-      <span>5</span>
+      <label for="rating" class="form-label"> Rating </label>
+      <div class="rating-container">
+        <input
+          type="range"
+          name="rating"
+          id="rating"
+          max="5"
+          min="1"
+          class="form-range"
+        />
+        <div class="rating-labels">
+          <span>1</span>
+          <span>5</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
     <div>
       <label for="comment" class="form-label">
         <textarea
@@ -86,8 +91,13 @@
         <h6 class="card-subtitle mb-2 text-body-secondary">
           <%= `${review.rating} Star` %>
         </h6>
-        <form action="">
-          <button type="submit" class="btn-danger">Delete review</button>
+        <form
+          method="post"
+          action="/listing/<%= hotelData._id %>/review/<%= review.id %>?_method=DELETE"
+        >
+          <button type="submit" class="btn btn-sm btn-dark review-delete-btn">
+            Delete
+          </button>
         </form>
       </div>
     </div>

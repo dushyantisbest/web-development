@@ -119,6 +119,16 @@ app.post(
   })
 );
 
+// review delete route
+app.delete(
+  "/listing/:id/review/:reviewId",
+  asyncWrapper(async (req, res) => {
+    const listing = await Listing.findById(req.params.id);
+    const review = await Review.findById(req.params.reviewId);
+    listing.update
+    res.send("working");
+  })
+);
 // if the above routes does not match
 app.use((req, res, next) => {
   next(new ErrorHandlingExpress(404, "Page not found"));
