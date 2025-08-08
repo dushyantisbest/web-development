@@ -1,0 +1,32 @@
+import app from "./app.js";
+import connectionInstance from "./db.js";
+import ErrorHandlingExpress from "./utils/ErrorHandling.js";
+import listingRoute from "./routes/listingRoute.js";
+import reviewRoute from "./routes/reviewRoute.js";
+// import InputData from "./init.js";
+await connectionInstance();
+//run to imput fake data
+// InputData();
+
+//routes
+
+app.use("/listing", listingRoute);
+app.use("/listing/:id/review", reviewRoute);
+
+// if the above routes does not match
+app.use((req, res, next) => {
+  next(new ErrorHandlingExpress(404, "Page not found"));
+});
+
+app.use((err, req, res, next) => {
+  let statusCode = err.statusCode || 500;
+  let message = err.message || "Internal server error";
+
+  res.status(statusCode).render("error.ejs", { statusCode, message });
+});
+
+app.listen(8080, () => {
+  console.log("server is working");
+});
+
+// just some random line might delete later
