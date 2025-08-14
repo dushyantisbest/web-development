@@ -34,9 +34,6 @@ router.post(
   "/add",
   validateListing,
   asyncWrapper(async (req, res) => {
-    // if (!req.body) {
-    //   throw new ErrorHandlingExpress(400, "Enter valid data");
-    // }
     await Listing.insertOne(req.body);
     res.redirect("/listing");
   })
