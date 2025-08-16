@@ -26,9 +26,6 @@ const listingSchema = new mongoose.Schema(
 // mongoose middleware to remove all the reviews when the listing is deleted
 
 listingSchema.post("findOneAndDelete", async function (myListing) {
-  console.log("getting called");
-  console.log(myListing);
-
   if (myListing.reviews) {
     await Review.deleteMany({
       _id: { $in: myListing.reviews },

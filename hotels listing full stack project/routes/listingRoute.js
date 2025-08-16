@@ -35,6 +35,8 @@ router.post(
   validateListing,
   asyncWrapper(async (req, res) => {
     await Listing.insertOne(req.body);
+    req.flash("success", "user registerd succesfully");
+    // console.log(req.flash("success"));
     res.redirect("/listing");
   })
 );

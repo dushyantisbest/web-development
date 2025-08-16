@@ -17,7 +17,7 @@ const sessionOptions = {
   secret: "mysupersecretkey",
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: { secure: false }, // make it true in production right now on localhost it should be set false
 };
 //code for setting path
 
@@ -25,9 +25,6 @@ const sessionOptions = {
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use(methodOverride("_method"));
 app.use(session(sessionOptions));
 app.use(flash());
 app.use((req, res, next) => {
@@ -35,4 +32,8 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
+
 export default app;

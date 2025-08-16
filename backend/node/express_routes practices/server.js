@@ -25,7 +25,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(cookieParser());
-app.use("/user", user_route);
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(express.static(path.join(__dirname, "public")));
@@ -35,10 +34,12 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/user", user_route);
+
 app.get("/cookie/add", (req, res) => {
   req.flash("success", "User registered sucessfully");
   res.cookie("colour", "red");
-  // console.log(req.flash("success"));
+  console.log(res.locals.success);
 
   res.render("basic.ejs");
 });
