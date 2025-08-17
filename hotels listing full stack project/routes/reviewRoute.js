@@ -27,6 +27,7 @@ router.post(
     const myReview = await Review.create(req.body);
     listing.reviews.push(myReview);
     await listing.save();
+    req.flash("success", "Review added");
     res.redirect(`/listing/${listing.id}`);
   })
 );
@@ -39,6 +40,7 @@ router.delete(
       $pull: { reviews: req.params.reviewId },
     });
     await Review.findByIdAndDelete(req.params.reviewId);
+    req.flash("success", "Review Deleted");
     res.redirect(`/listing/${req.params.id}`);
   })
 );

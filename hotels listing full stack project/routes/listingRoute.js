@@ -35,7 +35,7 @@ router.post(
   validateListing,
   asyncWrapper(async (req, res) => {
     await Listing.insertOne(req.body);
-    req.flash("success", "user registerd succesfully");
+    req.flash("success", "New Listing added ");
     // console.log(req.flash("success"));
     res.redirect("/listing");
   })
@@ -47,7 +47,12 @@ router.get(
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
     const hotelData = await Listing.findById(id).populate("reviews");
-    res.render("indivisual_description.ejs", { hotelData });
+    if (!hotelData) {
+      req.flash("error", "Listing not found");
+      res.redirect("/listing");
+    } else {
+      res.render("indivisual_description.ejs", { hotelData });
+    }
   })
 );
 
@@ -73,6 +78,7 @@ router.put(
     const { id } = req.params;
 
     await Listing.findByIdAndUpdate(id, req.body, { runValidators: true });
+    req.flash("success", "Listing updated ");
     res.redirect(`/listing/${id}`);
   })
 );
@@ -83,6 +89,7 @@ router.delete(
   asyncWrapper(async (req, res) => {
     let id = req.params.id;
     await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing deleted");
     res.redirect("/listing");
   })
 );
