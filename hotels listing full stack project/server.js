@@ -3,6 +3,7 @@ import connectionInstance from "./db.js";
 import ErrorHandlingExpress from "./utils/ErrorHandling.js";
 import listingRoute from "./routes/listingRoute.js";
 import reviewRoute from "./routes/reviewRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 // import InputData from "./init.js";
 await connectionInstance();
@@ -13,6 +14,7 @@ await connectionInstance();
 
 app.use("/listing", listingRoute);
 app.use("/listing/:id/review", reviewRoute);
+app.use("/user", userRoute);
 
 // if the above routes does not match
 app.use((req, res, next) => {

@@ -8,7 +8,7 @@ import session from "express-session";
 import flash from "connect-flash";
 import passport from "passport";
 import localStrategy from "passport-local";
-import User from "./models/user.model";
+import User from "./models/user.model.js";
 
 //get the dirname variable
 const __filename = fileURLToPath(import.meta.url);
