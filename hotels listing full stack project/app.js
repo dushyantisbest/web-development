@@ -17,7 +17,11 @@ const sessionOptions = {
   secret: "mysupersecretkey",
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }, // make it true in production right now on localhost it should be set false
+  cookie: {
+    secure: false, // make it true in production right now on localhost it should be set false
+    maxAge: 7 * 24 * 60 * 60 * 1000, // maximum age of the cookie , auto renew each requrest
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  },
 };
 //code for setting path
 
