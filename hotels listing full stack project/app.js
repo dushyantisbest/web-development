@@ -6,6 +6,9 @@ import methodOverride from "method-override";
 import engine from "ejs-mate";
 import session from "express-session";
 import flash from "connect-flash";
+import passport from "passport";
+import localStrategy from "passport-local";
+import User from "./models/user.model";
 
 //get the dirname variable
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +34,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
