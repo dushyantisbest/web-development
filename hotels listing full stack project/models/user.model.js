@@ -3,7 +3,7 @@ import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    email: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
   },
   { timestamp: true }
 );
