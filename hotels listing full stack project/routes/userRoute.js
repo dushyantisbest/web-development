@@ -2,6 +2,7 @@ import express from "express";
 // import User from "../models/user.model.js";
 import asyncWrapper from "../utils/asyncWraper.js";
 import User from "../models/user.model.js";
+import passport from "passport";
 
 const router = express.Router();
 
@@ -22,6 +23,22 @@ router.post(
       req.flash("error", error.message);
       res.redirect("/user/signup");
     }
+  })
+);
+
+router.get("/login", (req, res) => {
+  res.render("user/login.ejs");
+});
+
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  asyncWrapper(async (req, res) => {
+    req.flash("success", "Welcome to flatmate");
+    res.redirect("/listing");
   })
 );
 
