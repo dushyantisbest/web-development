@@ -3,6 +3,7 @@ import Review from "../models/review.model.js";
 import Listing from "../models/listing.model.js";
 import asyncWrapper from "../utils/asyncWraper.js";
 import { reviewValidation } from "../schemaValidation.js";
+import { isLoggedIn } from "../middleware.js";
 
 const router = express.Router({ mergeParams: true });
 
@@ -20,6 +21,7 @@ const validateReview = (req, res, next) => {
 // Review post route
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   asyncWrapper(async (req, res) => {
     const listing = await Listing.findOne({ _id: req.params.id });
@@ -35,6 +37,7 @@ router.post(
 // review delete route
 router.delete(
   "/:reviewId",
+  isLoggedIn,
   asyncWrapper(async (req, res) => {
     await Listing.findByIdAndUpdate(req.params.id, {
       $pull: { reviews: req.params.reviewId },

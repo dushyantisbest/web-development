@@ -15,10 +15,16 @@ router.post(
   asyncWrapper(async (req, res) => {
     try {
       const { username, email, password } = req.body;
-      await User.register(new User({ username, email }), password);
+      const user = await User.register(new User({ username, email }), password);
       // show a flash message
-      req.flash("success", "Welcome to flatMate");
-      res.redirect("/listing");
+
+      req.login(user, function (err) {
+        if (err) {
+          return next(err);
+        }
+        req.flash("success", "Welcome to flatMate");
+        res.redirect("/listing");
+      });
     } catch (error) {
       req.flash("error", error.message);
       res.redirect("/user/signup");
@@ -33,7 +39,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    failureRedirect: "/login",
+    failureRedirect: "/user/login",
     failureFlash: true,
   }),
   asyncWrapper(async (req, res) => {

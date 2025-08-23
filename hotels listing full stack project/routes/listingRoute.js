@@ -2,6 +2,7 @@ import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
 import Listing from "../models/listing.model.js";
 import { listingValidation } from "../schemaValidation.js";
+import { isLoggedIn } from "../middleware.js";
 
 const router = express.Router({ mergeParams: true });
 
@@ -32,6 +33,7 @@ router.get("/add", (req, res) => {
 
 router.post(
   "/add",
+  isLoggedIn,
   validateListing,
   asyncWrapper(async (req, res) => {
     await Listing.insertOne(req.body);
@@ -59,6 +61,7 @@ router.get(
 //edit
 router.get(
   "/edit/:id",
+  isLoggedIn,
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
     let hotelData = await Listing.findById(id);
@@ -70,6 +73,7 @@ router.get(
 //update
 router.put(
   "/edit/:id",
+  isLoggedIn,
   validateListing,
   asyncWrapper(async (req, res) => {
     if (!req.body) {
@@ -86,6 +90,7 @@ router.put(
 //delete
 router.delete(
   "/delete/:id",
+  isLoggedIn,
   asyncWrapper(async (req, res) => {
     let id = req.params.id;
     await Listing.findByIdAndDelete(id);
