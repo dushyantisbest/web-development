@@ -1,6 +1,14 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   padding-top: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
@@ -58,6 +66,13 @@ form .btn {
 
 footer {
   background-color: #fef2f4;
+  width: 100%;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  /* background: #fff; */
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .rating-container {
@@ -145,4 +160,8 @@ footer {
     opacity: 0;
     transform: translateY(-10px);
   }
+}
+
+.container {
+  flex: 1;
 }
