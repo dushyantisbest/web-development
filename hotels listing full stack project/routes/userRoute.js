@@ -3,6 +3,7 @@ import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
 import User from "../models/user.model.js";
 import passport from "passport";
+import { saveRedirectUrlLocal } from "../middleware.js";
 
 const router = express.Router();
 
@@ -38,14 +39,26 @@ router.get("/login", (req, res) => {
 
 router.post(
   "/login",
+  saveRedirectUrlLocal,
   passport.authenticate("local", {
     failureRedirect: "/user/login",
     failureFlash: true,
   }),
   asyncWrapper(async (req, res) => {
-    req.flash("success", "Welcome to flatmate");
-    res.redirect("/listing");
+    req.flash("success", "You are logged in !");
+
+    res.redirect(res.locals.redirectUrl);
   })
 );
+
+router.post("/logout", async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "logout successful");
+    res.redirect("/listing");
+  });
+});
 
 export default router;

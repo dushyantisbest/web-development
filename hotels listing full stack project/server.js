@@ -23,12 +23,9 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || "Internal server error";
-
   res.status(statusCode).render("error.ejs", { statusCode, message });
 });
 
 app.listen(8080, () => {
   console.log("server is working");
 });
-
-// just some random line might delete later

@@ -2,7 +2,11 @@ import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
 import Listing from "../models/listing.model.js";
 import { listingValidation } from "../schemaValidation.js";
-import { isLoggedIn } from "../middleware.js";
+import {
+  isLoggedIn,
+  saveRedirectUrlLocal,
+  saveRedirectUrlSession,
+} from "../middleware.js";
 
 const router = express.Router({ mergeParams: true });
 
@@ -20,6 +24,7 @@ const validateListing = (req, res, next) => {
 //read
 router.get(
   "/",
+  saveRedirectUrlSession,
   asyncWrapper(async (req, res) => {
     const list = await Listing.find({});
     res.render("landing.ejs", { list });
@@ -27,7 +32,7 @@ router.get(
 );
 
 //create
-router.get("/add", (req, res) => {
+router.get("/add", saveRedirectUrlSession, isLoggedIn, (req, res) => {
   res.render("add_listing_form.ejs");
 });
 
@@ -38,7 +43,6 @@ router.post(
   asyncWrapper(async (req, res) => {
     await Listing.insertOne(req.body);
     req.flash("success", "New Listing added ");
-    // console.log(req.flash("success"));
     res.redirect("/listing");
   })
 );
@@ -46,6 +50,7 @@ router.post(
 // to display indivisul hotel data
 router.get(
   "/:id",
+  saveRedirectUrlSession,
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
     const hotelData = await Listing.findById(id).populate("reviews");
@@ -61,6 +66,7 @@ router.get(
 //edit
 router.get(
   "/edit/:id",
+  saveRedirectUrlSession,
   isLoggedIn,
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
