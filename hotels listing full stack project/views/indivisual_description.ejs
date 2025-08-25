@@ -13,7 +13,13 @@
     <p class="card-text"><%= hotelData.description %></p>
     <p class="">&#x20B9;<%= hotelData.price.toLocaleString("en-IN") %>/night</p>
     <span class="cart"><%= hotelData.location%>, <%= hotelData.country %></span>
+    <br />
+    <br />
+
+    <p>Property By <b><%= hotelData.owner.username %></b></p>
     <div class="row">
+      <% if (currUser && currUser.id === hotelData.owner.id) { %>
+
       <form
         action="/listing/edit/<%= hotelData._id %>"
         method="get"
@@ -29,9 +35,13 @@
       >
         <button type="submit" class="btn btn-danger">delete</button>
       </form>
+
+      <% } %>
     </div>
   </div>
 </div>
+
+<hr />
 
 <!-- review form  -->
 
@@ -87,10 +97,14 @@
     <% for(let review of hotelData.reviews ) { %>
     <div class="card review-card m-2 col-3" style="width: 18rem">
       <div class="card-body">
+        <h6><%= review.createdBy.username %></h3>
         <p class="card-text"><%= review.comment %></p>
         <h6 class="card-subtitle mb-2 text-body-secondary">
           <%= `${review.rating} Star` %>
         </h6>
+
+        <% if (currUser && currUser.id === review.createdBy.id) { %>
+
         <form
           method="post"
           action="/listing/<%= hotelData._id %>/review/<%= review.id %>?_method=DELETE"
@@ -99,6 +113,7 @@
             Delete
           </button>
         </form>
+        <% } %>
       </div>
     </div>
     <% } %>

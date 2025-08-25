@@ -8,7 +8,7 @@ const listingValidation = joi
     location: joi.string().required(),
     country: joi.string().required(),
     description: joi.string().required(),
-    owner: joi.string().required(),
+    owner: joi.string(),
     review: joi.array(),
   })
   .required();

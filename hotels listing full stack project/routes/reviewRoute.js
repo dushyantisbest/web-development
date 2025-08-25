@@ -14,7 +14,10 @@ router.post(
   asyncWrapper(async (req, res) => {
     const listing = await Listing.findOne({ _id: req.params.id });
 
-    const myReview = await Review.create(req.body);
+    const reviewData = { ...req.body, createdBy: req.user.id };
+
+    const myReview = await Review.create(reviewData);
+
     listing.reviews.push(myReview);
     await listing.save();
     req.flash("success", "Review added");

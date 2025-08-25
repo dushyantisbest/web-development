@@ -4,6 +4,7 @@ import Listing from "../models/listing.model.js";
 
 import {
   isLoggedIn,
+  isOwner,
   saveRedirectUrlLocal,
   saveRedirectUrlSession,
   validateListing,
@@ -31,7 +32,9 @@ router.post(
   isLoggedIn,
   validateListing,
   asyncWrapper(async (req, res) => {
-    await Listing.insertOne(req.body);
+    const listingData = { ...req.body, owner: req.user.id };
+    await Listing.insertOne(listingData);
+
     req.flash("success", "New Listing added ");
     res.redirect("/listing");
   })
@@ -43,7 +46,16 @@ router.get(
   saveRedirectUrlSession,
   asyncWrapper(async (req, res) => {
     const { id } = req.params;
-    const hotelData = await Listing.findById(id).populate("reviews");
+    const hotelData = await Listing.findById(id)
+      .populate({
+        path: "reviews",
+        model: "Review",
+        populate: {
+          path: "createdBy",
+          model: "User",
+        },
+      })
+      .populate("owner");
     if (!hotelData) {
       req.flash("error", "Listing not found");
       res.redirect("/listing");
@@ -70,6 +82,7 @@ router.get(
 router.put(
   "/edit/:id",
   isLoggedIn,
+  isOwner,
   validateListing,
   asyncWrapper(async (req, res) => {
     if (!req.body) {
@@ -87,6 +100,7 @@ router.put(
 router.delete(
   "/delete/:id",
   isLoggedIn,
+  isOwner,
   asyncWrapper(async (req, res) => {
     let id = req.params.id;
     await Listing.findByIdAndDelete(id);
