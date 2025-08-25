@@ -19,6 +19,7 @@ const listingSchema = new mongoose.Schema(
     country: { type: String, required: true },
     description: { type: String, required: true },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );

@@ -30,16 +30,19 @@
     </ul>
   </div>
   <ul class="my-2 my-lg-0 navbar-nav">
+    <% if (!currUser) { %>
     <li class="nav-item">
       <a href="/user/login" class="nav-link">login</a>
     </li>
     <li class="nav-item">
       <a href="/user/signup" class="nav-link me-3">signup</a>
     </li>
+    <% } %> <% if (currUser) { %>
     <form action="/user/logout" method="post">
       <li class="nav-item">
-        <button type="submit" class="nav-link me-3s">logout</button>
+        <button type="submit" class="nav-link me-3">logout</button>
       </li>
     </form>
+    <% } %>
   </ul>
 </nav>

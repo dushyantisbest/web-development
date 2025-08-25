@@ -296,7 +296,10 @@ const sampleListings = [
 
 const InputData = async () => {
   try {
-    await Listing.insertMany(sampleListings);
+    const newsampleListings = sampleListings.map((obj) => {
+      return { ...obj, owner: "68a7f6316d6f97b852309964" };
+    });
+    await Listing.insertMany(newsampleListings);
     console.log("data inserted");
   } catch (error) {
     console.log("data insert failed", error);
