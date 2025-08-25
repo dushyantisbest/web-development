@@ -1,3 +1,5 @@
+import { listingValidation, reviewValidation } from "./schemaValidation.js";
+
 const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.flash("error", "You are not logged in");
@@ -20,4 +22,32 @@ const saveRedirectUrlLocal = (req, res, next) => {
   next();
 };
 
-export { isLoggedIn, saveRedirectUrlLocal, saveRedirectUrlSession };
+const validateListing = (req, res, next) => {
+  if (listingValidation.validate(req.body).error) {
+    throw new ErrorHandlingExpress(
+      400,
+      listingValidation.validate(req.body).error
+    );
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  if (reviewValidation.validate(req.body).error) {
+    throw new ErrorHandlingExpress(
+      400,
+      reviewValidation.validate(req.body).error
+    );
+  } else {
+    next();
+  }
+};
+
+export {
+  isLoggedIn,
+  saveRedirectUrlLocal,
+  saveRedirectUrlSession,
+  validateListing,
+  validateReview,
+};

@@ -2,21 +2,9 @@ import express from "express";
 import Review from "../models/review.model.js";
 import Listing from "../models/listing.model.js";
 import asyncWrapper from "../utils/asyncWraper.js";
-import { reviewValidation } from "../schemaValidation.js";
-import { isLoggedIn } from "../middleware.js";
+import { isLoggedIn, validateReview } from "../middleware.js";
 
 const router = express.Router({ mergeParams: true });
-
-const validateReview = (req, res, next) => {
-  if (reviewValidation.validate(req.body).error) {
-    throw new ErrorHandlingExpress(
-      400,
-      reviewValidation.validate(req.body).error
-    );
-  } else {
-    next();
-  }
-};
 
 // Review post route
 router.post(

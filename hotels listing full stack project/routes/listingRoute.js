@@ -1,25 +1,15 @@
 import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
 import Listing from "../models/listing.model.js";
-import { listingValidation } from "../schemaValidation.js";
+
 import {
   isLoggedIn,
   saveRedirectUrlLocal,
   saveRedirectUrlSession,
+  validateListing,
 } from "../middleware.js";
 
 const router = express.Router({ mergeParams: true });
-
-const validateListing = (req, res, next) => {
-  if (listingValidation.validate(req.body).error) {
-    throw new ErrorHandlingExpress(
-      400,
-      listingValidation.validate(req.body).error
-    );
-  } else {
-    next();
-  }
-};
 
 //read
 router.get(
