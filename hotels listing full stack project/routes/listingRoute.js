@@ -1,11 +1,10 @@
 import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
 import Listing from "../models/listing.model.js";
-
+import * as listingController from "../controller/listing.controller.js";
 import {
   isLoggedIn,
   isOwner,
-  saveRedirectUrlLocal,
   saveRedirectUrlSession,
   validateListing,
 } from "../middleware.js";
@@ -16,53 +15,29 @@ const router = express.Router({ mergeParams: true });
 router.get(
   "/",
   saveRedirectUrlSession,
-  asyncWrapper(async (req, res) => {
-    const list = await Listing.find({});
-    res.render("landing.ejs", { list });
-  })
+  asyncWrapper(listingController.homePage)
 );
 
 //create
-router.get("/add", saveRedirectUrlSession, isLoggedIn, (req, res) => {
-  res.render("add_listing_form.ejs");
-});
+router.get(
+  "/add",
+  saveRedirectUrlSession,
+  isLoggedIn,
+  listingController.listingForm
+);
 
 router.post(
   "/add",
   isLoggedIn,
   validateListing,
-  asyncWrapper(async (req, res) => {
-    const listingData = { ...req.body, owner: req.user.id };
-    await Listing.insertOne(listingData);
-
-    req.flash("success", "New Listing added ");
-    res.redirect("/listing");
-  })
+  asyncWrapper(listingController.addListing)
 );
 
 // to display indivisul hotel data
 router.get(
   "/:id",
   saveRedirectUrlSession,
-  asyncWrapper(async (req, res) => {
-    const { id } = req.params;
-    const hotelData = await Listing.findById(id)
-      .populate({
-        path: "reviews",
-        model: "Review",
-        populate: {
-          path: "createdBy",
-          model: "User",
-        },
-      })
-      .populate("owner");
-    if (!hotelData) {
-      req.flash("error", "Listing not found");
-      res.redirect("/listing");
-    } else {
-      res.render("indivisual_description.ejs", { hotelData });
-    }
-  })
+  asyncWrapper(listingController.showIndivisualListing)
 );
 
 //edit
@@ -70,12 +45,7 @@ router.get(
   "/edit/:id",
   saveRedirectUrlSession,
   isLoggedIn,
-  asyncWrapper(async (req, res) => {
-    const { id } = req.params;
-    let hotelData = await Listing.findById(id);
-
-    res.render("edit_listing_form.ejs", { hotelData });
-  })
+  asyncWrapper(listingController.editListingForm)
 );
 
 //update
@@ -84,16 +54,7 @@ router.put(
   isLoggedIn,
   isOwner,
   validateListing,
-  asyncWrapper(async (req, res) => {
-    if (!req.body) {
-      throw new ErrorHandlingExpress(400, "Enter valid data");
-    }
-    const { id } = req.params;
-
-    await Listing.findByIdAndUpdate(id, req.body, { runValidators: true });
-    req.flash("success", "Listing updated ");
-    res.redirect(`/listing/${id}`);
-  })
+  asyncWrapper(listingController.UpdateListing)
 );
 
 //delete
@@ -101,12 +62,7 @@ router.delete(
   "/delete/:id",
   isLoggedIn,
   isOwner,
-  asyncWrapper(async (req, res) => {
-    let id = req.params.id;
-    await Listing.findByIdAndDelete(id);
-    req.flash("success", "Listing deleted");
-    res.redirect("/listing");
-  })
+  asyncWrapper(listingController.destroyListing)
 );
 
 export default router;

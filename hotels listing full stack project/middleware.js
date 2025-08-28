@@ -49,8 +49,9 @@ const validateReview = (req, res, next) => {
 };
 
 const isOwner = asyncWrapper(async (req, res, next) => {
-  const listingOwnerId = await Listing.findById(req.params.id).owner;
-  if (req.user && req.user.id === listingOwnerId) {
+  const listingOwner = await Listing.findById(req.params.id).populate("owner");
+
+  if (req.user && req.user.id === listingOwner.owner.id) {
     return next();
   } else {
     req.flash("error", "You are not the owner of this property");
