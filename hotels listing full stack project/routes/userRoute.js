@@ -4,38 +4,15 @@ import asyncWrapper from "../utils/asyncWraper.js";
 import User from "../models/user.model.js";
 import passport from "passport";
 import { saveRedirectUrlLocal } from "../middleware.js";
+import * as userController from "../controller/user.controller.js";
 
 const router = express.Router();
 
-router.get("/signup", (req, res) => {
-  res.render("user/signup-form.ejs");
-});
+router.get("/signup", userController.renderSignupForm);
 
-router.post(
-  "/signup",
-  asyncWrapper(async (req, res) => {
-    try {
-      const { username, email, password } = req.body;
-      const user = await User.register(new User({ username, email }), password);
-      // show a flash message
+router.post("/signup", asyncWrapper(userController.signup));
 
-      req.login(user, function (err) {
-        if (err) {
-          return next(err);
-        }
-        req.flash("success", "Welcome to flatMate");
-        res.redirect("/listing");
-      });
-    } catch (error) {
-      req.flash("error", error.message);
-      res.redirect("/user/signup");
-    }
-  })
-);
-
-router.get("/login", (req, res) => {
-  res.render("user/login.ejs");
-});
+router.get("/login", userController.renderLoginForm);
 
 router.post(
   "/login",
@@ -44,21 +21,9 @@ router.post(
     failureRedirect: "/user/login",
     failureFlash: true,
   }),
-  asyncWrapper(async (req, res) => {
-    req.flash("success", "You are logged in !");
-
-    res.redirect(res.locals.redirectUrl);
-  })
+  asyncWrapper(userController.login)
 );
 
-router.post("/logout", async (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "logout successful");
-    res.redirect("/listing");
-  });
-});
+router.post("/logout", asyncWrapper(userController.logout));
 
 export default router;
