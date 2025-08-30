@@ -19,19 +19,14 @@ router.get(
 );
 
 //create
-router.get(
-  "/add",
-  saveRedirectUrlSession,
-  isLoggedIn,
-  listingController.listingForm
-);
-
-router.post(
-  "/add",
-  isLoggedIn,
-  validateListing,
-  asyncWrapper(listingController.addListing)
-);
+router
+  .route("/add")
+  .get(saveRedirectUrlSession, isLoggedIn, listingController.listingForm)
+  .post(
+    isLoggedIn,
+    validateListing,
+    asyncWrapper(listingController.addListing)
+  );
 
 // to display indivisul hotel data
 router.get(
@@ -41,21 +36,19 @@ router.get(
 );
 
 //edit
-router.get(
-  "/edit/:id",
-  saveRedirectUrlSession,
-  isLoggedIn,
-  asyncWrapper(listingController.editListingForm)
-);
-
-//update
-router.put(
-  "/edit/:id",
-  isLoggedIn,
-  isOwner,
-  validateListing,
-  asyncWrapper(listingController.UpdateListing)
-);
+router
+  .route("/edit/:id")
+  .get(
+    saveRedirectUrlSession,
+    isLoggedIn,
+    asyncWrapper(listingController.editListingForm)
+  )
+  .put(
+    isLoggedIn,
+    isOwner,
+    validateListing,
+    asyncWrapper(listingController.UpdateListing)
+  );
 
 //delete
 router.delete(

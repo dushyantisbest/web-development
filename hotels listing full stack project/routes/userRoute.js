@@ -8,21 +8,22 @@ import * as userController from "../controller/user.controller.js";
 
 const router = express.Router();
 
-router.get("/signup", userController.renderSignupForm);
+router
+  .route("/signup")
+  .get(userController.renderSignupForm)
+  .post(asyncWrapper(userController.signup));
 
-router.post("/signup", asyncWrapper(userController.signup));
-
-router.get("/login", userController.renderLoginForm);
-
-router.post(
-  "/login",
-  saveRedirectUrlLocal,
-  passport.authenticate("local", {
-    failureRedirect: "/user/login",
-    failureFlash: true,
-  }),
-  asyncWrapper(userController.login)
-);
+router
+  .route("/login")
+  .get(userController.renderLoginForm)
+  .post(
+    saveRedirectUrlLocal,
+    passport.authenticate("local", {
+      failureRedirect: "/user/login",
+      failureFlash: true,
+    }),
+    asyncWrapper(userController.login)
+  );
 
 router.post("/logout", asyncWrapper(userController.logout));
 

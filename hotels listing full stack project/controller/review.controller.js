@@ -3,9 +3,7 @@ import Listing from "../models/listing.model.js";
 
 export const addReview = async (req, res) => {
   const listing = await Listing.findOne({ _id: req.params.id });
-
   const reviewData = { ...req.body, createdBy: req.user.id };
-
   const myReview = await Review.create(reviewData);
 
   listing.reviews.push(myReview);
