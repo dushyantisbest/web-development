@@ -1,4 +1,3 @@
-// import { express } from "express";
 import Listing from "../models/listing.model.js";
 
 export const homePage = async (req, res) => {
