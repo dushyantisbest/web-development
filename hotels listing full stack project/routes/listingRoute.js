@@ -1,6 +1,5 @@
 import express from "express";
 import asyncWrapper from "../utils/asyncWraper.js";
-import Listing from "../models/listing.model.js";
 import * as listingController from "../controller/listing.controller.js";
 import {
   isLoggedIn,

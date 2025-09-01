@@ -1,7 +1,5 @@
 import express from "express";
-// import User from "../models/user.model.js";
 import asyncWrapper from "../utils/asyncWraper.js";
-import User from "../models/user.model.js";
 import passport from "passport";
 import { saveRedirectUrlLocal } from "../middleware.js";
 import * as userController from "../controller/user.controller.js";
