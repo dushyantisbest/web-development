@@ -198,3 +198,31 @@
   -webkit-transition: background-position 0.7s;
   transition: background-position 0.7s;
 }
+
+/* for reivew card */
+
+.stars {
+  font-size: 1.5rem; /* bigger size */
+  color: #000; /* default star color */
+}
+
+.stars.star-1::before {
+  content: "★☆☆☆☆";
+  color: #000;
+}
+.stars.star-2::before {
+  content: "★★☆☆☆";
+  color: #000;
+}
+.stars.star-3::before {
+  content: "★★★☆☆";
+  color: #000;
+}
+.stars.star-4::before {
+  content: "★★★★☆";
+  color: #000;
+}
+.stars.star-5::before {
+  content: "★★★★★";
+  color: #000;
+}

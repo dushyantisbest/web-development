@@ -48,15 +48,12 @@
 <div class="form-group">
   <h3>Leave a review</h3>
 
-
   <form
     action="/listing/<%= hotelData._id %>/review"
     method="post"
     class="needs-validation"
     novalidate
   >
-
-
     <div class="mb-2">
       <label for="rating" class="form-label"> Rating </label>
       <div class="rating-container">
@@ -74,7 +71,15 @@
         </div> -->
 
         <fieldset class="starability-slot">
-          <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="rating"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
           <input type="radio" id="first-rate1" name="rating" value="1" />
           <label for="first-rate1" title="Terrible">1 star</label>
           <input type="radio" id="first-rate2" name="rating" value="2" />
@@ -115,11 +120,9 @@
     <% for(let review of hotelData.reviews ) { %>
     <div class="card review-card m-2 col-3" style="width: 18rem">
       <div class="card-body">
-        <h6><%= review.createdBy.username %></h3>
+        <h6 class="mt-2 mb-0"><%= review.createdBy.username %></h6>
+        <div class="mb-2 stars star-<%= review.rating %>"></div>
         <p class="card-text"><%= review.comment %></p>
-        <h6 class="card-subtitle mb-2 text-body-secondary">
-          <%= `${review.rating} Star` %>
-        </h6>
 
         <% if (currUser && currUser.id === review.createdBy.id) { %>
 
