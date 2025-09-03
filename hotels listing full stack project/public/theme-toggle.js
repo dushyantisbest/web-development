@@ -4,28 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
     const body = document.body;
     
-    // Check for saved theme preference or default to light mode
+    // Check current theme (already applied by inline script)
     const currentTheme = localStorage.getItem('theme') || 'light';
     
-    // Apply the saved theme
-    if (currentTheme === 'dark') {
-        body.setAttribute('data-theme', 'dark');
-        updateToggleIcon(true);
-    }
+    // Update toggle icons based on current theme
+    updateToggleIcon(currentTheme === 'dark');
     
     // Theme toggle event listeners
     function handleThemeToggle() {
-        const isDark = body.getAttribute('data-theme') === 'dark';
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         
         // Add transition class for smooth animation
         document.documentElement.classList.add('theme-transitioning');
         
         if (isDark) {
-            body.removeAttribute('data-theme');
+            document.documentElement.removeAttribute('data-theme');
             localStorage.setItem('theme', 'light');
             updateToggleIcon(false);
         } else {
-            body.setAttribute('data-theme', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
             updateToggleIcon(true);
         }

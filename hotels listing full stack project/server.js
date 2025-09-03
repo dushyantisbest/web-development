@@ -28,6 +28,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { statusCode, message });
 });
 
-app.listen(8080, () => {
+app.listen(process.env.PORT, () => {
   console.log("server is working");
 });
