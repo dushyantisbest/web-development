@@ -1,4 +1,8 @@
+import dotenv from "dotenv";
 import express from "express";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -9,12 +13,13 @@ import flash from "connect-flash";
 import passport from "passport";
 import localStrategy from "passport-local";
 import User from "./models/user.model.js";
-import dotenv from "dotenv";
 //get the dirname variable
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+
+dotenv.config();
 
 const sessionOptions = {
   secret: "mysupersecretkey",
@@ -26,8 +31,23 @@ const sessionOptions = {
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   },
 };
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "uploads",
+    allowedFormats: ["png", "jpg", "jpeg"],
+  },
+});
+
+export const upload = multer({ storage: storage });
 //code for setting path
-dotenv.config();
 // all the middle wares
 app.engine("ejs", engine);
 app.set("view engine", "ejs");

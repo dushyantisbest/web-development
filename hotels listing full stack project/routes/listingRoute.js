@@ -1,4 +1,5 @@
 import express from "express";
+import { upload } from "../app.js";
 import asyncWrapper from "../utils/asyncWraper.js";
 import * as listingController from "../controller/listing.controller.js";
 import {
@@ -23,7 +24,8 @@ router
   .get(saveRedirectUrlSession, isLoggedIn, listingController.listingForm)
   .post(
     isLoggedIn,
-    validateListing,
+    // validateListing,
+    upload.single("image"),
     asyncWrapper(listingController.addListing)
   );
 

@@ -10,7 +10,14 @@ export const listingForm = (req, res) => {
 };
 
 export const addListing = async (req, res) => {
-  const listingData = { ...req.body, owner: req.user.id };
+  const listingData = {
+    ...req.body,
+    owner: req.user.id,
+    image: { url: req.file.path, filename: req.file.filename },
+  };
+  console.log(req.file);
+  console.log(req.body);
+
   await Listing.insertOne(listingData);
   req.flash("success", "New Listing added ");
   res.redirect("/listing");
