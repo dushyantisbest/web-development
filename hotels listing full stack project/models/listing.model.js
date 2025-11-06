@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import Review from "./review.model.js";
+import cloudinary from "cloudinary";
 
 const listingSchema = new mongoose.Schema(
   {
@@ -30,6 +31,18 @@ const listingSchema = new mongoose.Schema(
 // mongoose middleware to remove all the reviews when the listing is deleted
 
 listingSchema.post("findOneAndDelete", async function (myListing) {
+  // to delete the image from cloudnary
+  const publicId = myListing.image.filename;
+  cloudinary.uploader
+    .destroy(publicId, { invalidate: true })
+    .then((result) => {
+      console.log("Deletion successful:", result);
+    })
+    .catch((error) => {
+      console.error("Deletion failed:", error);
+    });
+
+  // to delete all the review connected the listing
   if (myListing.reviews) {
     await Review.deleteMany({
       _id: { $in: myListing.reviews },
